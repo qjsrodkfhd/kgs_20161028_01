@@ -8,7 +8,55 @@
 <script src="../../js/article/xml2json.js"></script>
 
 </head>
+<style type="text/css">
+* {
+	font size: 9pt;
+}
+
+p {
+	width: 600px;
+	text-align: center;
+}
+
+table therd tr td {
+	background-color: gray;
+}
+
+
+</style>
+</head>
 <body>
-	
+	<!-- 게시판 글쓰기 -->
+	<form name="BoardWrite" action="BoardWrite_ok.jsp" method="post"
+		onsubmit="BoardWriteChk();">
+		<table border="1" summary="게시판 등록 폼">
+			<caption>게시판 등록</caption>
+			<colgroup>
+				<col width="100" />
+				<col width="500" />
+			</colgroup>
+
+			<tbody>
+				<tr>
+					<th align="center">제목</th>
+					<td><input type="text" id="title" name="title"
+						maxlength="300" value=""/></td>
+				</tr>
+				<tr>
+					<th align="center">작성자</th>
+					<td><input type="text" id="writer" name="writer"
+						maxlength="100" value="" /></td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><textarea name="content" rows="15" cols="85"></textarea></td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+			<input type="button" value="확인">
+			<input type="button" value="취소"> 
+		</p>
+	</form>
 </body>
 </html>
