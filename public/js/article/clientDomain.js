@@ -1,4 +1,4 @@
-//article domain 객체
+//client article domain 객체
 exports.Article = function (t, c, w) {
 
 	this.num = 0;
