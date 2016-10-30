@@ -1,6 +1,6 @@
 //다른 파일들과 연결하는 부분
 var Dao = require('./serverDao.js');
-var dao = new Dao.serverDao();
+//var dao = new Dao.serverDao();
 var Articlejs = require('./serverDomain.js');
 var article = new Articlejs.Article();
 
@@ -10,12 +10,14 @@ exports.ArticleController = function() {
 //	글저장 controller 메서드
 	this.requestSave = function(article, callback) {
 				
-
+		var isSuccess = dao.saveDao(article, callback);
+		return isSuccess;
 	};
 	
 //	글목록 controller 메서드
 	this.requestSelectAll = function(callback) {
-				
+			var send_articles = dao.selectAllDao(callback);
+			return send_articles;
 			
 	};
 	

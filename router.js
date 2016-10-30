@@ -35,14 +35,57 @@ var articleController = new ArticleContollerjs.ArticleController();
 //글쓰기 
 app.all('/save', function(req, res) {
 
+	var title = req.param('title');
+	var writer = req.param('writer');
+	var content = req.param('content');
+	
+	
+	console.log('title = ' +title);
+	console.log('writer = ' + writer);
+	console.log('content = ' + content);	
 
+	
+var article = new Article(title, writer, content);
+	
+	articleController.requestSave(article, function(isSuccess){
+		
+		 console.log('응답 데이터');
+		    var output = '';
+		    output += '<?xml version="1.0" encoding="UTF-8" ?>';  
+		    output += '<message>';
+		    output += isSuccess.message;
+		    output += '</message>';
+		    console.log(output);
+		    res.type('text/xml'); //<- 반드시 기술해야 함. 
+		    res.send(output);    
+		
+	});
+	
 
 });
 
 //글목록
 app.all('/selectAll', function(req, res) {
 
-
+	console.log('/selectAll 요청 받음');
+	
+	articleController.requestSelectAll(function(send_articles){
+	var output ='';
+	output +='<?xml version="1.0" encoding ="UTF-8"?>';
+	 output += '<articles>';
+	    send_articles.forEach(function (article) {
+	        output += '<article>';
+	        output += '<num>' + article.num + '</num>';
+	        output += '<title>' + article.title + '</title>';
+	        output += '<writer>' + article.writer + '</writer>';
+	        output += '<readcount>' + article.readCount + '</readcount>';
+	        output += '</article>';
+	
+	});
+	    output += '</articles>';
+		console.log(output);
+		res.type('text/xml');    
+	    res.send(output);
 
 });
 
