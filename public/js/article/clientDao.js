@@ -42,13 +42,14 @@ exports.ArticleDao = function ArticleDao() {
 			var xml_articles = xml.getElementsByTagName('article');
 			
 			for(var i = 0; i<xml_articles.length; i++){
-				num: xml_articles[i].childNodes[0].childNodes[0].nodeValue,
-				title : xml_articles[i].childNodes[1].childNodes[0].nodeValue,
-				writer : xml_articles[i].childNodes[2].childNodes[0].nodeValue,
-				readCount:xml_articles[i].childNodes[3].childNodes[0].nodeValue
-			;}
-			
-			articles.push(article);
+				var article = {
+						num: xml_articles[i].childNodes[0].childNodes[0].nodeValue,
+						title : xml_articles[i].childNodes[1].childNodes[0].nodeValue,
+						writer : xml_articles[i].childNodes[2].childNodes[0].nodeValue,
+						readCount:xml_articles[i].childNodes[3].childNodes[0].nodeValue
+				};
+				articles.push(article);
+			}
 			
 		}catch(e){
 			
