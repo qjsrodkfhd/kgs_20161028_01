@@ -7,12 +7,50 @@ exports.ArticleDao = function ArticleDao() {
 //	글저장 dao 메서드
 	this.saveDao = function(article, callback) {
 	
+		var isSuccess;
+		try{
+			
+			var sql = 'insert into articles(title, writer, content) values (?,?,?)';
+			var values = [article.title, article.writer, article.content];
+			
+			db.query(sql, values, function(error, result){
+				
+				if(error){
+					isSuccess = { message : false};
+				}else{
+					isSuccess = { message: true};
+				}
+				callback(isSuccess);
+			});
+		}catch(e){
+			console.log('serverDao 예외 발생');
+			console.log(e.message);
+			isSuccess = { message : false };
+			return isSuccess;
+		}
 		
 	};	
 	
 //	글목록 dao 메서드
 	this.selectAllDao = function(callback) {
 		
+		var send_articles;
+		
+		try{
+			var sql ='select * from articles';
+			
+			db.query(sql,function(error,result){
+				if(!error){
+					send_article = result;
+				}
+				callback(send_articles);
+			});
+		}catch(e){
+			console.log('목록보기 예외 발생!');
+			console.log(e.message);
+			send_articles = undefined;
+			return send_articles;
+		}
 		
 	};
 	

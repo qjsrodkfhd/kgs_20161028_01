@@ -16,7 +16,15 @@ exports.ArticleController = function ArticleController() {
 //	글저장 controller 메서드
 	this.requestSave = function(article) {
 		
+		var isSuccess = dao.saveDao(article);
 		
+		if(isSuccess === true){
+			
+			alert('글 저장성공!!');
+		
+		}else{
+			alert('글 저장 실패..');
+		}
 	document.location = 'selectAllView.html';
 		
 	};
@@ -24,6 +32,8 @@ exports.ArticleController = function ArticleController() {
 //	글목록 controller 메서드
 	this.requestSelectAll = function() {
 		
+		var articles = dao.selectAllDao();
+		return articles;
 	
 	};
 	
